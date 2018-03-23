@@ -58,7 +58,12 @@ namespace FinanzBot
                 string answer = "Leider habe ich keine Information gefunden!  Ich lerne noch dazu, wenn ich die Antwort habe werde ich Dich kontaktieren!";
 
                 if (response.answers.Length > 0)
+                {
+                    if (smalltalkData[response.answers[0].answer] != null)
+                        answer = smalltalkData[response.answers[0].answer].ToString();
+
                     answer = response.answers[0].answer;
+                }
 
                 await context.PostAsync(answer);
 
