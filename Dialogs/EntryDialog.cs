@@ -69,7 +69,7 @@ namespace FinanzBot
                     {
                         // Get random answer from array
                         int index = randomGen.Next(0, ((JArray)smalltalkData[response.answers[0].answer]).Count - 1);
-                        answer = smalltalkData[response.answers[index].answer][0].ToString();
+                        answer = smalltalkData[response.answers[0].answer][index].ToString();
                     }
                     else
                     {
