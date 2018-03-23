@@ -33,7 +33,7 @@ namespace FinanzBot
             else
             {
                 // Fall back on QnAMaker
-                QnAResponse response = await ServiceProxies.GetQnAResponse(message.Text);
+                //QnAResponse response = await ServiceProxies.GetQnAResponse(message.Text);
 
                 string answer = "Leider habe ich keine Information gefunden!  Ich lerne noch dazu, wenn ich die Antwort habe werde ich Dich kontaktieren!";
 
