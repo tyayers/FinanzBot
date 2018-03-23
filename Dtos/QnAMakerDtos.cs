@@ -16,6 +16,6 @@ namespace FinanzBot.Dtos
     public class QnAAnswer
     {
         public string answer { get; set; }
-        public decimal score { get; set; }
+        public float score { get; set; }
     }
 }

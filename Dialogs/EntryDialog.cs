@@ -63,7 +63,7 @@ namespace FinanzBot
                 QnAResponse response = await ServiceProxies.GetQnAResponse(message.Text);
                 string answer = "Leider habe ich keine Information gefunden!  Ich lerne noch dazu, wenn ich die Antwort habe werde ich Dich kontaktieren!";
 
-                if (response.answers.Length > 0)
+                if (response.answers.Length > 0 && response.answers[0].score > 0.7)
                 {
                     if (smalltalkData[response.answers[0].answer] != null)
                     {

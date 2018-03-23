@@ -54,7 +54,7 @@ directLine.activity$
             bingClientTTS.synthesize(activity.text, BingTTS.SupportedLocales.deDE_Female, () => {
                 
             });
-            $("#chatwindow").prepend("<div class='dialogbubbleleft'><i><b>CobiBot: </b></i> " + activity.speak + "</div>");    
+            $("#chatwindow").prepend("<div class='dialogbubbleleft'><i><b>CobiBot: </b></i> " + activity.text + "</div>");    
         }
         // else {
         //     $("#chatwindow").prepend("<div class='dialogbubbleright'><i>You</i>" + activity.text + "</div>");    
