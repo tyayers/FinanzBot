@@ -53,10 +53,10 @@ namespace FinanzBot
             var message = await result;
 
             string insuranceNumber = message.Text;
-            await context.PostAsync($"Ihre Versicherungsnummer lautet {insuranceNumber}");
+            await context.PostAsync($"Ihre Versicherungsnummer lautet {String.Join(" ", insuranceNumber.ToCharArray())}");
 
             await context.PostAsync($"Bitte sagen Sie Ihre Vor und Nach Name");
-            context.Wait(this.AfterInsuranceNumberEntry);
+            context.Wait(this.AfterNameEntry);
         }
 
         protected virtual async Task AfterNameEntry(IDialogContext context, IAwaitable<IMessageActivity> result)
