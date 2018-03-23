@@ -49,9 +49,9 @@ directLine.activity$
 .subscribe(
     activity => {
         //$("#text-display").html(activity.text);
-        if (activity.from.id == "FloweyBot" && activity.text != "") {
+        if (activity.from.id == "PROD-FINANZBOT" && activity.text != "") {
             
-            bingClientTTS.synthesize(activity.speak, BingTTS.SupportedLocales.deDE_FemaleRUS, () => {
+            bingClientTTS.synthesize(activity.text, BingTTS.SupportedLocales.deDE_Female, () => {
                 
             });
             $("#chatwindow").prepend("<div class='dialogbubbleleft'><i><b>CobiBot: </b></i> " + activity.speak + "</div>");    
