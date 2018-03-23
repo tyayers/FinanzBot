@@ -42,7 +42,8 @@ namespace FinanzBot.Utilities
             LuisResponse data = new LuisResponse();
             using (HttpClient client = new HttpClient())
             {
-                string requestUri = ConfigurationManager.AppSettings["LuisEndpoint"] + Query;
+                //string requestUri = ConfigurationManager.AppSettings["LuisEndpoint"] + Query;
+                string requestUri = "https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/fc1ce5b4-33b3-4ddb-af93-06883221d26c?subscription-key=d88d84e7cd6543afa09d5746e5db45c2&verbose=true&timezoneOffset=0&q=" + Query;
 
                 HttpResponseMessage msg = await client.GetAsync(requestUri);
 
