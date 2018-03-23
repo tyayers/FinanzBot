@@ -23,7 +23,7 @@ namespace FinanzBot.Utilities
             using (WebClient client = new WebClient())
             {
                 client.Headers.Add("Content-Type", "application/json");
-                client.Headers.Add("Ocp-Apim-Subscription-Key", "6a50acd8314e456191ecf4cbf40164c9");
+                client.Headers.Add("Ocp-Apim-Subscription-Key", ConfigurationManager.AppSettings["QnAKey"]);
                 client.Encoding = System.Text.Encoding.UTF8;
 
                 string requestUri = ConfigurationManager.AppSettings["QnAEndpoint"];

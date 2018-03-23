@@ -6,13 +6,34 @@ using Microsoft.Bot.Builder.Dialogs;
 using System.Net.Http;
 using FinanzBot.Dtos;
 using FinanzBot.Utilities;
+using System.Net;
+using System.Web;
+using Newtonsoft.Json.Linq;
 
 namespace FinanzBot
 {
     [Serializable]
     public class EntryDialog : IDialog<object>
     {
-        protected int count = 1;
+        protected JObject smalltalkData = new JObject();
+        public EntryDialog()
+        {
+            // Load smalltalk data
+            using (HttpClient client = new HttpClient())
+            {
+                HttpContext httpCon = HttpContext.Current;
+                string baseUrl = httpCon.Request.Url.Scheme + "://" + httpCon.Request.Url.Authority + httpCon.Request.ApplicationPath.TrimEnd('/') + '/';
+                client.BaseAddress = new System.Uri(baseUrl);
+
+                HttpResponseMessage msg = client.GetAsync("/wwwroot/assistant/Smalltalk-DE.js").Result;
+
+                if (msg.IsSuccessStatusCode)
+                {
+                    string data = msg.Content.ReadAsStringAsync().Result;
+                    smalltalkData = Newtonsoft.Json.Linq.JObject.Parse(data);
+                }
+            }
+        }
 
         public async Task StartAsync(IDialogContext context)
         {
@@ -33,15 +54,11 @@ namespace FinanzBot
             else
             {
                 // Fall back on QnAMaker
-                //QnAResponse response = await ServiceProxies.GetQnAResponse(message.Text);
-
+                QnAResponse response = await ServiceProxies.GetQnAResponse(message.Text);
                 string answer = "Leider habe ich keine Information gefunden!  Ich lerne noch dazu, wenn ich die Antwort habe werde ich Dich kontaktieren!";
 
-                //if (response.answers != null && response.answers.Length > 0 && response.answers[0].score > 50)
-                //    answer = response.answers[0].answer;
-
-                //if (userData.LanguageCode != "de")
-                //    answer = await ServiceProxies.TranslateText(answer, "de", userData.LanguageCode);
+                if (response.answers.Length > 0)
+                    answer = response.answers[0].answer;
 
                 await context.PostAsync(answer);
 

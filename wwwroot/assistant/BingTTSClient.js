@@ -296,7 +296,7 @@ var BingTTS;
                     supportedLocaleValue = "Microsoft Server Speech Text to Speech Voice (de-DE, Hedda)";
                     break;
                 case SupportedLocales.deDE_FemaleRUS:
-                    locale = "'de-de'";
+                    locale = "'de-DE'";
                     gender = "'Female'";
                     supportedLocaleValue = "Microsoft Server Speech Text to Speech Voice (de-DE, HeddaRUS)";
                     break;                    

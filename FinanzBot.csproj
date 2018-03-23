@@ -201,7 +201,17 @@
   <ItemGroup>
     <Content Include="default.htm" />
     <Content Include="Global.asax" />
+    <Content Include="wwwroot\assistant\Smalltalk-DE.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Web.config" />
+    <Content Include="wwwroot\assistant\BingSpeech.js" />
+    <Content Include="wwwroot\assistant\BingTTSClient.js" />
+    <Content Include="wwwroot\assistant\directline.js" />
+    <Content Include="wwwroot\assistant\index.html" />
+    <Content Include="wwwroot\assistant\screenshot.PNG" />
+    <Content Include="wwwroot\assistant\script.js" />
+    <Content Include="wwwroot\assistant\styles.css" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
@@ -226,6 +236,7 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+    <Content Include="wwwroot\assistant\README.md" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
