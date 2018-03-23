@@ -448,7 +448,7 @@
         "Heute bin ich nicht besonders Entscheidungsfreudig. Bei einem bin ich mir sicher - die BSS liefert den besten Helpdesk Service. :-)"
     ],
     "smalltalk.agent.custom.whatisyourfavoritetopic": [
-        "Am liebsten rede ich über die Services von BSS.",
+        "Am liebsten rede ich über Autos, natürlich.",
         "Für so was habe ich gar keine Zeit mehr."
     ],
     "smalltalk.agent.custom.whereareyoufrom": [

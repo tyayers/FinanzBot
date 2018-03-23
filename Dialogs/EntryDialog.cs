@@ -16,6 +16,8 @@ namespace FinanzBot
     public class EntryDialog : IDialog<object>
     {
         protected JObject smalltalkData = new JObject();
+        protected System.Random randomGen = new Random();
+
         public EntryDialog()
         {
             // Load smalltalk data
@@ -43,6 +45,10 @@ namespace FinanzBot
         public async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> argument)
         {
             var message = await argument;
+            // First send typing
+            var typingActivity = ((Activity)message).CreateReply();
+            typingActivity.Type = ActivityTypes.Typing;
+            await context.PostAsync(typingActivity);
 
             LuisResponse luisInfo = await ServiceProxies.GetEntityFromLUIS(message.Text);
 
@@ -59,8 +65,16 @@ namespace FinanzBot
 
                 if (response.answers.Length > 0)
                 {
-                    if (smalltalkData[response.answers[0].answer] != null)  
-                        answer = smalltalkData[response.answers[0].answer][0].ToString();
+                    if (smalltalkData[response.answers[0].answer] != null)
+                    {
+                        // Get random answer from array
+                        int index = randomGen.Next(0, ((JArray)smalltalkData[response.answers[0].answer]).Count - 1);
+                        answer = smalltalkData[response.answers[index].answer][0].ToString();
+                    }
+                    else
+                    {
+                        answer = response.answers[0].answer;
+                    }
                 }
 
                 await context.PostAsync(answer);
