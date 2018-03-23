@@ -59,10 +59,8 @@ namespace FinanzBot
 
                 if (response.answers.Length > 0)
                 {
-                    if (smalltalkData[response.answers[0].answer] != null)
-                        answer = smalltalkData[response.answers[0].answer].ToString();
-
-                    answer = response.answers[0].answer;
+                    if (smalltalkData[response.answers[0].answer] != null)  
+                        answer = smalltalkData[response.answers[0].answer][0].ToString();
                 }
 
                 await context.PostAsync(answer);
