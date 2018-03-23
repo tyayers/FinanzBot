@@ -1,10 +1,10 @@
 var directLine = new DirectLine.DirectLine({
-    secret: "NtlPAy0ijLM.cwA.5ww.nkzOFYavLJPrf5UhLWi7rB8ZYpapzYVu0C0dbs6wx1g"
+    secret: "Emw4xml7xI0.cwA.pJg.Nv4IdtUntfCDIl4_GXTMlFBkR3l18kQ7TsuR7GVjAig"
 });
 
-var bingClientTTS = new BingTTS.Client("ec36dce7cf73494d8208b1ec284218ef", "enGB_Female");
+var bingClientTTS = new BingTTS.Client("ec36dce7cf73494d8208b1ec284218ef", "deDE_Female");
 
-var client = new BingSpeech.RecognitionClient("ec36dce7cf73494d8208b1ec284218ef", "en-GB");
+var client = new BingSpeech.RecognitionClient("ec36dce7cf73494d8208b1ec284218ef", "de-DE");
 client.startMicAndContinuousRecognition();
 
 client.onFinalResponseReceived = function (response) {
@@ -51,7 +51,7 @@ directLine.activity$
         //$("#text-display").html(activity.text);
         if (activity.from.id == "FloweyBot" && activity.text != "") {
             
-            bingClientTTS.synthesize(activity.speak, BingTTS.SupportedLocales.enGB_Female, () => {
+            bingClientTTS.synthesize(activity.speak, BingTTS.SupportedLocales.deDE_FemaleRUS, () => {
                 
             });
             $("#chatwindow").prepend("<div class='dialogbubbleleft'><i><b>CobiBot: </b></i> " + activity.speak + "</div>");    
