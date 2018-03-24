@@ -62,7 +62,7 @@ namespace FinanzBot
             {
                 // Wikipedia
                 string answer = "Das weiﬂ ich nicht, ich lerne noch..";
-                string wikiResult = await ServiceProxies.SearchWikipedia(message.Text);
+                string wikiResult = await ServiceProxies.SearchWikipedia(luisInfo.entities[0].entity);
 
                 Newtonsoft.Json.Linq.JArray jsonResult = JArray.Parse(wikiResult);
                 JArray titleArray = (JArray)jsonResult[1];
