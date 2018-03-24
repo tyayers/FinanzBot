@@ -71,7 +71,7 @@ namespace FinanzBot
 
                 if (titleArray.Count > 0)
                 {
-                    answer = titleArray[0].ToString() + ". " + descriptionArray[0].ToString();
+                    answer = "Ich kenne mich nicht so aus, aber hier sind Infos von Wikipedia: " + titleArray[0].ToString() + ". " + descriptionArray[0].ToString();
                 }
 
                 await context.PostAsync(answer);
