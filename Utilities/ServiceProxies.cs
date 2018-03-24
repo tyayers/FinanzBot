@@ -6,6 +6,7 @@ using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web;
 
@@ -54,6 +55,24 @@ namespace FinanzBot.Utilities
             }
 
             return data;
+        }
+
+        public static async Task<string> SearchWikipedia(string message)
+        {
+            string result = "";
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri("https://de.wikipedia.org/w/api.php?action=opensearch&format=json&search=" + message);
+
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            HttpResponseMessage response = await client.GetAsync("");
+            if (response.IsSuccessStatusCode)
+            {
+                result = await response.Content.ReadAsStringAsync();
+            }
+
+            return result;
         }
     }
 }

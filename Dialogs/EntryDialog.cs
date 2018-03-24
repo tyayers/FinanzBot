@@ -76,10 +76,36 @@ namespace FinanzBot
                         answer = response.answers[0].answer;
                     }
                     else
+                    {
                         System.Diagnostics.Trace.TraceError("MISSING-ANSWER: " + message.Text);
+                        string wikiResult = await ServiceProxies.SearchWikipedia(message.Text);
+
+                        Newtonsoft.Json.Linq.JArray jsonResult = JArray.Parse(wikiResult);
+                        JArray titleArray = (JArray)jsonResult[1];
+                        JArray descriptionArray = (JArray)jsonResult[2];
+                        JArray linkArray = (JArray)jsonResult[3];
+
+                        if (titleArray.Count > 0)
+                        {
+                            answer = titleArray[0].ToString() + ". " + descriptionArray[0].ToString();
+                        }
+                    }
                 }
                 else
+                {
                     System.Diagnostics.Trace.TraceError("MISSING-ANSWER: " + message.Text);
+                    string wikiResult = await ServiceProxies.SearchWikipedia(message.Text);
+
+                    Newtonsoft.Json.Linq.JArray jsonResult = JArray.Parse(wikiResult);
+                    JArray titleArray = (JArray)jsonResult[1];
+                    JArray descriptionArray = (JArray)jsonResult[2];
+                    JArray linkArray = (JArray)jsonResult[3];
+
+                    if (titleArray.Count > 0)
+                    {
+                        answer = titleArray[0].ToString() + ". " + descriptionArray[0].ToString();
+                    }
+                }
 
                 await context.PostAsync(answer);
 
