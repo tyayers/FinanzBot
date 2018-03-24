@@ -74,13 +74,12 @@ namespace FinanzBot
                     else if (!response.answers[0].answer.Contains(".agent."))
                     {
                         answer = response.answers[0].answer;
-                        System.Diagnostics.Trace.TraceWarning("MISSING-ANSWER: " + message.Text);
                     }
                     else
-                        System.Diagnostics.Trace.TraceWarning("MISSING-ANSWER: " + message.Text);
+                        System.Diagnostics.Trace.TraceError("MISSING-ANSWER: " + message.Text);
                 }
                 else
-                    System.Diagnostics.Trace.TraceWarning("MISSING-ANSWER: " + message.Text);
+                    System.Diagnostics.Trace.TraceError("MISSING-ANSWER: " + message.Text);
 
                 await context.PostAsync(answer);
 

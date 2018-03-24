@@ -52,9 +52,9 @@ directLine.activity$
         //$("#text-display").html(activity.text);
         if (activity.from.id == "PROD-FINANZBOT" && activity.text != "") {
             
-            $("#spinner").fadeOut(500);
+            
             bingClientTTS.synthesize(activity.text, BingTTS.SupportedLocales.deDE_Female, () => {
-                
+                $("#spinner").fadeOut(500);
             });
             $("#chatwindow").prepend("<div class='dialogbubbleleft'><i><b>CobiBot: </b></i> " + activity.text + "</div>");    
         }
