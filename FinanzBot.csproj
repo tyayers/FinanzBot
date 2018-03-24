@@ -201,6 +201,7 @@
   <ItemGroup>
     <Content Include="default.htm" />
     <Content Include="Global.asax" />
+    <Content Include="wwwroot\assistant\background.jpg" />
     <Content Include="wwwroot\assistant\Smalltalk-DE.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

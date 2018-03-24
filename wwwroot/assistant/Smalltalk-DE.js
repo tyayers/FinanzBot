@@ -417,8 +417,11 @@
     ],
     //TODO change bot name
     "smalltalk.agent.custom.AreYouHuman": [
-        "Ich bin BITSY. Ein digitaler Chatbot. Ich arbeite völlig eigenständig.",
-        "Das liegt doch auf der Hand.Ich bin Ihre digitale ChatassistentIN."
+        "Ich bin Pia. Ein digitaler Chatbot. Ich arbeite völlig eigenständig.",
+        "Das liegt doch auf der Hand. Ich bin Ihre digitale Chatassistentin."
+    ],
+    "smalltalk.agent.custom.youlikeme": [
+        "Ja, sehr gern sogar."
     ],
     "smalltalk.agent.custom.ilikeyou": [
         "Danke für das Kompliment! Ich tue nur meinen Job und helfe dir so gut ich kann. :-)",

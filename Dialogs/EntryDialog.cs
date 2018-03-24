@@ -61,7 +61,7 @@ namespace FinanzBot
             {
                 // Fall back on QnAMaker
                 QnAResponse response = await ServiceProxies.GetQnAResponse(message.Text);
-                string answer = "Leider habe ich keine Information gefunden!  Ich lerne noch dazu, wenn ich die Antwort habe werde ich Dich kontaktieren!";
+                string answer = "Das weiß ich nicht, ich lerne noch..";
 
                 if (response.answers.Length > 0 && response.answers[0].score > 0.7)
                 {

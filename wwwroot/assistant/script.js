@@ -10,6 +10,7 @@ client.startMicAndContinuousRecognition();
 client.onFinalResponseReceived = function (response) {
     // $("#text-display").html(response);
     // lastQuestion = response;
+    $("#spinner").fadeIn(10);
     $("#chatwindow").prepend("<div class='dialogbubbleright'><i><b>You: </b></i>" + response + "</div>"); 
     directLine.postActivity({
         from: { id: '1234', name: 'Tyler' }, // required (from.name is optional)
@@ -51,6 +52,7 @@ directLine.activity$
         //$("#text-display").html(activity.text);
         if (activity.from.id == "PROD-FINANZBOT" && activity.text != "") {
             
+            $("#spinner").fadeOut(500);
             bingClientTTS.synthesize(activity.text, BingTTS.SupportedLocales.deDE_Female, () => {
                 
             });
