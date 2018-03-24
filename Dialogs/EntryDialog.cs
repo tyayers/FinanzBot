@@ -71,11 +71,16 @@ namespace FinanzBot
                         int index = randomGen.Next(0, ((JArray)smalltalkData[response.answers[0].answer]).Count - 1);
                         answer = smalltalkData[response.answers[0].answer][index].ToString();
                     }
-                    else
+                    else if (!response.answers[0].answer.Contains(".agent."))
                     {
                         answer = response.answers[0].answer;
+                        System.Diagnostics.Trace.TraceWarning("MISSING-ANSWER: " + message.Text);
                     }
+                    else
+                        System.Diagnostics.Trace.TraceWarning("MISSING-ANSWER: " + message.Text);
                 }
+                else
+                    System.Diagnostics.Trace.TraceWarning("MISSING-ANSWER: " + message.Text);
 
                 await context.PostAsync(answer);
 
