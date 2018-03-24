@@ -52,7 +52,7 @@ directLine.activity$
         //$("#text-display").html(activity.text);
         if (activity.from.id == "PROD-FINANZBOT" && activity.text != "") {
             
-            
+            $("#answerdiv").text(activity.text);
             bingClientTTS.synthesize(activity.text, BingTTS.SupportedLocales.deDE_Female, () => {
                 $("#spinner").fadeOut(500);
             });
@@ -68,10 +68,10 @@ var lastQuestion = "";
 
 // A $( document ).ready() block.
 $(document).ready(function() {
-    $("#textInput").keypress(function(key) {
+    $("#testinput").keypress(function(key) {
         if (key.keyCode == 13) {
-            var x = document.getElementById("textInput").value;
-            document.getElementById("textInput").value = "";
+            var x = document.getElementById("testinput").value;
+            document.getElementById("testinput").value = "";
             $("#chatwindow").prepend("<div class='dialogbubbleright'><i><b>You: </b></i>" + x + "</div>"); 
             // lastQuestion = x;
             directLine.postActivity({

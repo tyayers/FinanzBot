@@ -54,8 +54,28 @@ namespace FinanzBot
 
             if (luisInfo.intents != null && luisInfo.intents.Length > 0 && luisInfo.intents[0].score > 0.8 && luisInfo.intents[0].intent == "Kreditablösen")
             {
+                // Kredit
                 await context.PostAsync("Sie wollen die Kreditablösesumme wissen?  Das geht ganz einfach. Sagen Sie jetzt ihre Versicherungsnummer vor.");
                 context.Wait(this.AfterInsuranceNumberEntry);
+            }
+            else if (luisInfo.intents != null && luisInfo.intents.Length > 0 && luisInfo.intents[0].score > 0.8 && luisInfo.intents[0].intent == "Wikipedia")
+            {
+                // Wikipedia
+                string answer = "Das weiß ich nicht, ich lerne noch..";
+                string wikiResult = await ServiceProxies.SearchWikipedia(message.Text);
+
+                Newtonsoft.Json.Linq.JArray jsonResult = JArray.Parse(wikiResult);
+                JArray titleArray = (JArray)jsonResult[1];
+                JArray descriptionArray = (JArray)jsonResult[2];
+                JArray linkArray = (JArray)jsonResult[3];
+
+                if (titleArray.Count > 0)
+                {
+                    answer = titleArray[0].ToString() + ". " + descriptionArray[0].ToString();
+                }
+
+                await context.PostAsync(answer);
+                context.Wait(MessageReceivedAsync);
             }
             else
             {
@@ -78,33 +98,11 @@ namespace FinanzBot
                     else
                     {
                         System.Diagnostics.Trace.TraceError("MISSING-ANSWER: " + message.Text);
-                        string wikiResult = await ServiceProxies.SearchWikipedia(message.Text);
-
-                        Newtonsoft.Json.Linq.JArray jsonResult = JArray.Parse(wikiResult);
-                        JArray titleArray = (JArray)jsonResult[1];
-                        JArray descriptionArray = (JArray)jsonResult[2];
-                        JArray linkArray = (JArray)jsonResult[3];
-
-                        if (titleArray.Count > 0)
-                        {
-                            answer = titleArray[0].ToString() + ". " + descriptionArray[0].ToString();
-                        }
                     }
                 }
                 else
                 {
                     System.Diagnostics.Trace.TraceError("MISSING-ANSWER: " + message.Text);
-                    string wikiResult = await ServiceProxies.SearchWikipedia(message.Text);
-
-                    Newtonsoft.Json.Linq.JArray jsonResult = JArray.Parse(wikiResult);
-                    JArray titleArray = (JArray)jsonResult[1];
-                    JArray descriptionArray = (JArray)jsonResult[2];
-                    JArray linkArray = (JArray)jsonResult[3];
-
-                    if (titleArray.Count > 0)
-                    {
-                        answer = titleArray[0].ToString() + ". " + descriptionArray[0].ToString();
-                    }
                 }
 
                 await context.PostAsync(answer);
