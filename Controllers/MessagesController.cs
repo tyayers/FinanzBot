@@ -23,7 +23,7 @@ namespace FinanzBot
             // check if activity is of type message
             if (activity != null && activity.GetActivityType() == ActivityTypes.Message)
             {
-                await Conversation.SendAsync(activity, () => new EntryDialog());
+                await Conversation.SendAsync(activity, () => new EntryDialog().DefaultIfException());
             }
             else
             {

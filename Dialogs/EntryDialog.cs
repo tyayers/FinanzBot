@@ -58,25 +58,25 @@ namespace FinanzBot
                 await context.PostAsync("Sie wollen die Kreditablösesumme wissen?  Das geht ganz einfach. Sagen Sie jetzt ihre Versicherungsnummer vor.");
                 context.Wait(this.AfterInsuranceNumberEntry);
             }
-            else if (luisInfo.intents != null && luisInfo.intents.Length > 0 && luisInfo.intents[0].score > 0.8 && luisInfo.intents[0].intent == "Wikipedia")
-            {
-                // Wikipedia
-                string answer = "Das weiß ich nicht, ich lerne noch..";
-                string wikiResult = await ServiceProxies.SearchWikipedia(luisInfo.entities[0].entity);
+            //else if (luisInfo.intents != null && luisInfo.intents.Length > 0 && luisInfo.intents[0].score > 0.8 && luisInfo.intents[0].intent == "Wikipedia")
+            //{
+            //    // Wikipedia
+            //    string answer = "Das weiß ich nicht, ich lerne noch..";
+            //    string wikiResult = await ServiceProxies.SearchWikipedia(luisInfo.entities[0].entity);
 
-                Newtonsoft.Json.Linq.JArray jsonResult = JArray.Parse(wikiResult);
-                JArray titleArray = (JArray)jsonResult[1];
-                JArray descriptionArray = (JArray)jsonResult[2];
-                JArray linkArray = (JArray)jsonResult[3];
+            //    Newtonsoft.Json.Linq.JArray jsonResult = JArray.Parse(wikiResult);
+            //    JArray titleArray = (JArray)jsonResult[1];
+            //    JArray descriptionArray = (JArray)jsonResult[2];
+            //    JArray linkArray = (JArray)jsonResult[3];
 
-                if (titleArray.Count > 0)
-                {
-                    answer = "Ich kenne mich nicht so aus, aber hier sind Infos von Wikipedia: " + titleArray[0].ToString() + ". " + descriptionArray[0].ToString();
-                }
+            //    if (titleArray.Count > 0)
+            //    {
+            //        answer = "Ich kenne mich nicht so aus, aber hier sind Infos von Wikipedia: " + titleArray[0].ToString() + ". " + descriptionArray[0].ToString();
+            //    }
 
-                await context.PostAsync(answer);
-                context.Wait(MessageReceivedAsync);
-            }
+            //    await context.PostAsync(answer);
+            //    context.Wait(MessageReceivedAsync);
+            //}
             else
             {
                 // Fall back on QnAMaker
