@@ -6,6 +6,8 @@ using Microsoft.Bot.Builder.Dialogs;
 using System.Web.Http.Description;
 using System.Net.Http;
 using System.Web;
+using System;
+using System.Linq;
 
 namespace FinanzBot
 {
@@ -44,6 +46,18 @@ namespace FinanzBot
                 // Handle conversation state changes, like members being added and removed
                 // Use Activity.MembersAdded and Activity.MembersRemoved and Activity.Action for info
                 // Not available in all channels
+                var client = new ConnectorClient(new Uri(message.ServiceUrl));
+                IConversationUpdateActivity update = message;
+                if (update.MembersAdded.Any())
+                {
+                    var reply = message.CreateReply();
+                    var newMembers = update.MembersAdded?.Where(t => t.Id != message.Recipient.Id);
+                    foreach (var newMember in newMembers)
+                    {
+                        reply.Text = "Hallo, in bin Pia. Ich kann Fragen zu ihrem Kredit bewantworten sowie viele andere Fragen.";
+                        client.Conversations.ReplyToActivityAsync(reply);
+                    }
+                }
             }
             else if (message.Type == ActivityTypes.ContactRelationUpdate)
             {

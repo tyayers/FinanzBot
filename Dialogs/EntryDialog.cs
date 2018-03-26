@@ -55,8 +55,8 @@ namespace FinanzBot
             if (luisInfo.intents != null && luisInfo.intents.Length > 0 && luisInfo.intents[0].score > 0.8 && luisInfo.intents[0].intent == "Kreditablösen")
             {
                 // Kredit
-                await context.PostAsync("Sie wollen die Kreditablösesumme wissen?  Das geht ganz einfach. Sagen Sie jetzt ihre Versicherungsnummer vor.");
-                context.Wait(this.AfterInsuranceNumberEntry);
+                await context.PostAsync("Wollen Sie die Kreditablösesumme jetzt anfordern?");
+                context.Wait(this.StartKreditAblöseDialog);
             }
             //else if (luisInfo.intents != null && luisInfo.intents.Length > 0 && luisInfo.intents[0].score > 0.8 && luisInfo.intents[0].intent == "Wikipedia")
             //{
@@ -110,31 +110,28 @@ namespace FinanzBot
                 context.Wait(MessageReceivedAsync);
             }
         }
-        protected virtual async Task AfterInsuranceNumberEntry(IDialogContext context, IAwaitable<IMessageActivity> result)
+
+        protected virtual async Task StartKreditAblöseDialog(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
-            var message = await result;
+            var input = await result;
 
-            string insuranceNumber = message.Text;
-            await context.PostAsync($"Ihre Versicherungsnummer lautet {String.Join(" ", insuranceNumber.ToCharArray())}");
+            LuisResponse luisInfo = await ServiceProxies.GetEntityFromLUIS(input.Text);
 
-            await context.PostAsync($"Bitte sagen Sie Ihre Vor und Nach Name");
-            context.Wait(this.AfterNameEntry);
+            if (luisInfo.intents.Length > 0 && luisInfo.intents[0].intent == "Ja")
+            {
+                // Yes start kreditablösedialog
+                IDialog<string> kreditDialog = (IDialog<string>) new KreditAblöseDialog();
+                context.Call(kreditDialog, AfterKreditDialog);
+            }
+            else
+            {
+                context.Wait(MessageReceivedAsync);
+            }
         }
 
-        protected virtual async Task AfterNameEntry(IDialogContext context, IAwaitable<IMessageActivity> result)
+        protected virtual async Task AfterKreditDialog(IDialogContext context, IAwaitable<string> argument)
         {
-            var message = await result;
-
-            string name = message.Text;
-            await context.PostAsync($"Bitte sagen Sie ihre Geburtsdatum");
-            context.Wait(this.AfterBirthdayEntry);
-        }
-        protected virtual async Task AfterBirthdayEntry(IDialogContext context, IAwaitable<IMessageActivity> result)
-        {
-            var message = await result;
-
-            string birthday = message.Text;
-            await context.PostAsync($"Vielen Dank! Sie werden um die Ablösesumme Ihres Fahrzeuges mit der Post notifiziert.");
+            await context.PostAsync($"Vielen Dank, Ihre Kreditablöseinformation ist unterwegs.");
             context.Wait(this.MessageReceivedAsync);
         }
     }

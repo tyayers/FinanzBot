@@ -223,6 +223,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Dialogs\EntryDialog.cs" />
+    <Compile Include="Dialogs\KreditAblöseDialog.cs" />
     <Compile Include="Dtos\LuisDtos.cs" />
     <Compile Include="Dtos\QnAMakerDtos.cs" />
     <Compile Include="Global.asax.cs">

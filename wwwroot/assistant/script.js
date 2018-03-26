@@ -10,7 +10,7 @@ client.startMicAndContinuousRecognition();
 client.onFinalResponseReceived = function (response) {
     // $("#text-display").html(response);
     // lastQuestion = response;
-    $("#spinner").fadeIn(10);
+    //$("#spinner").fadeIn(10);
     $("#chatwindow").prepend("<div class='dialogbubbleright'><i><b>You: </b></i>" + response + "</div>"); 
     directLine.postActivity({
         from: { id: '1234', name: 'Tyler' }, // required (from.name is optional)
