@@ -1,14 +1,10 @@
-﻿using System;
-using System.Threading.Tasks;
-
-using Microsoft.Bot.Connector;
-using Microsoft.Bot.Builder.Dialogs;
-using System.Net.Http;
-using FinanzBot.Dtos;
+﻿using FinanzBot.Dtos;
 using FinanzBot.Utilities;
-using System.Net;
-using System.Web;
-using Newtonsoft.Json.Linq;
+using Microsoft.Bot.Builder.Dialogs;
+using Microsoft.Bot.Connector;
+using System;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace FinanzBot
 {
@@ -50,7 +46,7 @@ namespace FinanzBot
 
             if (luisInfo.intents != null && luisInfo.intents.Length > 0 && luisInfo.intents[0].score > 0.8 && luisInfo.intents[0].intent == "Ja")
             {
-                await context.PostAsync($"Bitte sagen Sie Ihren Vor und Nach Namen");
+                await context.PostAsync($"Bitte sagen Sie jetzt Ihren Vor und Nach Namen laut vor");
                 context.Wait(this.AfterNameEntry);
             }
             else if (luisInfo.intents != null && luisInfo.intents.Length > 0 && luisInfo.intents[0].score > 0.8 && luisInfo.intents[0].intent == "Abort")
@@ -76,7 +72,7 @@ namespace FinanzBot
             else
             {
                 string name = message.Text;
-                await context.PostAsync($"Bitte sagen Sie Ihr Geburtsdatum");
+                await context.PostAsync($"Bitte sagen Sie jetzt Ihr Geburtsdatum laut vor");
                 context.Wait(this.AfterBirthdayEntry);
             }
         }
