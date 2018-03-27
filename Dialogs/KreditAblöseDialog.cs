@@ -55,7 +55,7 @@ namespace FinanzBot
             }
             else
             {
-                context.Wait(this.MessageReceivedAsync);
+                StartAsync(context);
             }
         }
 
