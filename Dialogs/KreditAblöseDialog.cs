@@ -89,7 +89,7 @@ namespace FinanzBot
             else
             {
                 string birthday = message.Text;
-                await context.PostAsync($"Vielen Dank! Sie werden um die Ablösesumme Ihres Fahrzeuges mit der Post Ihnen schnellstmöglich zusenden.");
+                //await context.PostAsync($"Vielen Dank! Sie werden um die Ablösesumme Ihres Fahrzeuges mit der Post Ihnen schnellstmöglich zusenden.");
                 context.Done<string>(null);
             }
         }
