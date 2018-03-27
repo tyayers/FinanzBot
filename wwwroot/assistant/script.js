@@ -84,4 +84,13 @@ $(document).ready(function() {
             );            
         }
     });
+
+    directLine.postActivity({
+        from: { id: '1234', name: 'Tyler' }, // required (from.name is optional)
+        type: 'conversationUpdate',
+        text: ""
+    }).subscribe(
+        id => console.log("Posted activity, assigned ID ", id),
+        error => console.log("Error posting activity", error)
+    );      
 });

@@ -222,7 +222,7 @@
     ],
     "smalltalk.greetings.hello": [
         "Hallo, mein Freund!",
-        "Hey!",
+        "Hi!",
         "Guten Tag!",
         "Howdy."
     ],
@@ -250,7 +250,7 @@
         "Wie immer. Lass es uns bald wieder tun."
     ],
     "smalltalk.greetings.whatsup": [
-        "Hey. Was geht ab?",
+        "Hi. Was geht ab?",
         "Nicht sehr viel. Was ist los mit dir?",
         "Nicht viel. Was gibt's Neues bei dir?",
         "Den Traum leben."

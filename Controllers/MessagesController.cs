@@ -54,7 +54,7 @@ namespace FinanzBot
                     var newMembers = update.MembersAdded?.Where(t => t.Id != message.Recipient.Id);
                     foreach (var newMember in newMembers)
                     {
-                        reply.Text = "Hallo, in bin Pia. Ich kann Fragen zu ihrem Kredit bewantworten sowie viele andere Fragen.";
+                        reply.Text = "Hallo, ich bin Pia. Ich kann Fragen zu ihrem Kredit beantworten.";
                         client.Conversations.ReplyToActivityAsync(reply);
                     }
                 }

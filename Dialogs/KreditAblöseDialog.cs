@@ -17,6 +17,11 @@ namespace FinanzBot
     {
         public async Task StartAsync(IDialogContext context)
         {
+            await MessageReceivedAsync(context, null);
+        }
+
+        public async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> argument)
+        {
             await context.PostAsync("Bitte sagen Sie jetzt Ihre Versicherungsnummer laut vor.");
             context.Wait(AfterInsuranceNumberEntry);
         }
@@ -55,7 +60,7 @@ namespace FinanzBot
             }
             else
             {
-                StartAsync(context);
+                context.Wait(this.MessageReceivedAsync);
             }
         }
 
