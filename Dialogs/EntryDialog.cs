@@ -131,7 +131,7 @@ namespace FinanzBot
 
         protected virtual async Task AfterKreditDialog(IDialogContext context, IAwaitable<string> argument)
         {
-            await context.PostAsync($"Vielen Dank, Ihre Kreditablöseinformation ist unterwegs.");
+            //await context.PostAsync($"Vielen Dank, Ihre Kreditablöseinformation ist unterwegs.");
             context.Wait(this.MessageReceivedAsync);
         }
     }
