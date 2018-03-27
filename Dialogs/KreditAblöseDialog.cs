@@ -26,7 +26,7 @@ namespace FinanzBot
         {
             var message = await result;
             LuisResponse luisInfo = await ServiceProxies.GetEntityFromLUIS(message.Text);
-            if (luisInfo.intents != null && luisInfo.intents.Length > 0 && luisInfo.intents[0].score > 0.8 && luisInfo.intents[0].intent == "Abort")
+            if (luisInfo.intents != null && luisInfo.intents.Length > 0 && luisInfo.intents[0].score > 0.6 && luisInfo.intents[0].intent == "Abort")
             {
                 await context.PostAsync("Ok, sorry, wir hören jetzt auf. Vielleicht ein anderes mal!");
                 context.Done<string>(null);
@@ -49,14 +49,14 @@ namespace FinanzBot
                 await context.PostAsync($"Bitte sagen Sie jetzt Ihren Vor und Nach Namen laut vor");
                 context.Wait(this.AfterNameEntry);
             }
-            else if (luisInfo.intents != null && luisInfo.intents.Length > 0 && luisInfo.intents[0].score > 0.8 && luisInfo.intents[0].intent == "Abort")
+            else if (luisInfo.intents != null && luisInfo.intents.Length > 0 && luisInfo.intents[0].score > 0.6 && luisInfo.intents[0].intent == "Abort")
             {
                 await context.PostAsync("Ok, sorry, wir hören jetzt auf. Vielleicht ein anderes mal!");
                 context.Done<string>(null);
             }
             else
             {
-                context.Wait(this.MessageReceivedAsync);
+                await MessageReceivedAsync(context, result);
             }
         }
 
@@ -64,7 +64,7 @@ namespace FinanzBot
         {
             var message = await result;
             LuisResponse luisInfo = await ServiceProxies.GetEntityFromLUIS(message.Text);
-            if (luisInfo.intents != null && luisInfo.intents.Length > 0 && luisInfo.intents[0].score > 0.8 && luisInfo.intents[0].intent == "Abort")
+            if (luisInfo.intents != null && luisInfo.intents.Length > 0 && luisInfo.intents[0].score > 0.6 && luisInfo.intents[0].intent == "Abort")
             {
                 await context.PostAsync("Ok, sorry, wir hören jetzt auf. Vielleicht ein anderes mal!");
                 context.Done<string>(null);
@@ -81,7 +81,7 @@ namespace FinanzBot
             var message = await result;
 
             LuisResponse luisInfo = await ServiceProxies.GetEntityFromLUIS(message.Text);
-            if (luisInfo.intents != null && luisInfo.intents.Length > 0 && luisInfo.intents[0].score > 0.8 && luisInfo.intents[0].intent == "Abort")
+            if (luisInfo.intents != null && luisInfo.intents.Length > 0 && luisInfo.intents[0].score > 0.6 && luisInfo.intents[0].intent == "Abort")
             {
                 await context.PostAsync("Ok, sorry, wir hören jetzt auf. Vielleicht ein anderes mal!");
                 context.Done<string>(null);
