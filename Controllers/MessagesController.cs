@@ -58,7 +58,7 @@ namespace FinanzBot
                         // Hero card way
                         //var reply = message.CreateReply();
                         List<CardImage> cardImages = new List<CardImage>();
-                        cardImages.Add(new CardImage(url: "https://docsearch.blob.core.windows.net/files/support-icon.png"));
+                        cardImages.Add(new CardImage(url: "https://docsearch.blob.core.windows.net/files/fin-advisor.jpg"));
 
                         List<CardAction> cardButtons = new List<CardAction>();
 
@@ -88,8 +88,8 @@ namespace FinanzBot
 
                         HeroCard plCard = new HeroCard()
                         {
-                            Title = $"Hallo, ich bin Pia. Ich kann Fragen zu Deinen Konten beantworten.",
-                            Subtitle = $"FinTech ist cool!",
+                            Title = $"Hallo, ich bin Pia!",
+                            Subtitle = $"Ich kann Fragen zu Deinen Konten und Finanzierungen beantworten, zum Beispiel:",
                             Images = cardImages,
                             Buttons = cardButtons
                         };
