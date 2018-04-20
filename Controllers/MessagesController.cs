@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Web;
 using System;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace FinanzBot
 {
@@ -54,7 +55,63 @@ namespace FinanzBot
                     var newMembers = update.MembersAdded?.Where(t => t.Id != message.Recipient.Id);
                     foreach (var newMember in newMembers)
                     {
-                        reply.Text = "Hallo, ich bin Pia. Ich kann Fragen zu ihrem Kredit beantworten.";
+                        // Hero card way
+                        //var reply = message.CreateReply();
+                        List<CardImage> cardImages = new List<CardImage>();
+                        cardImages.Add(new CardImage(url: "https://docsearch.blob.core.windows.net/files/support-icon.png"));
+
+                        List<CardAction> cardButtons = new List<CardAction>();
+
+                        CardAction plButtonLoan = new CardAction()
+                        {
+                            Value = "Finanzierung",
+                            Type = "imBack",
+                            Title = "Persönlichisierte Finanzierung"
+                        };
+                        cardButtons.Add(plButtonLoan);
+
+                        CardAction plButtonCredit = new CardAction()
+                        {
+                            Value = "Dispotkredit Erhöhen",
+                            Type = "imBack",
+                            Title = "Dispotkrediterhöhung"
+                        };
+                        cardButtons.Add(plButtonCredit);
+
+                        CardAction plCloseCreditButton = new CardAction()
+                        {
+                            Value = "Ablösesumme",
+                            Type = "imBack",
+                            Title = "Kreditablösesumme Anfragen"
+                        };
+                        cardButtons.Add(plCloseCreditButton);
+
+                        HeroCard plCard = new HeroCard()
+                        {
+                            Title = $"Hallo, ich bin Pia. Ich kann Fragen zu Deinen Konten beantworten.",
+                            Subtitle = $"FinTech ist cool!",
+                            Images = cardImages,
+                            Buttons = cardButtons
+                        };
+
+                        Attachment plAttachment = plCard.ToAttachment();
+                        reply.Attachments.Add(plAttachment);
+
+
+                        // User suggestions way
+                        //reply.Type = ActivityTypes.Message;
+                        //reply.TextFormat = TextFormatTypes.Plain;
+
+                        //reply.SuggestedActions = new SuggestedActions()
+                        //{
+                        //    Actions = new List<CardAction>()
+                        //    {
+                        //        new CardAction(){ Title = "Blue", Type=ActionTypes.ImBack, Value="Blue" },
+                        //        new CardAction(){ Title = "Red", Type=ActionTypes.ImBack, Value="Red" },
+                        //        new CardAction(){ Title = "Green", Type=ActionTypes.ImBack, Value="Green" }
+                        //    }
+                        //};
+
                         client.Conversations.ReplyToActivityAsync(reply);
                     }
                 }
